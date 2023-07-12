@@ -11,19 +11,24 @@ const ioServer = require('socket.io')(port);
 
 
 ioServer.on('connection', (socket) =>{ // connection event emitted automatically by Sockt io
-    // console.log('Welcome, your socket id:', socket.id);
-    setInterval(() => {
-        socket.emit('new-flight', { event: 'new-flight', time: new Date(),  Details: { 
-            airLine: 'Royal Jordanian Airlines', 
-            flightID: uuid.v4(),
-            pilot: faker.person.fullName(),
-            destination: faker.location.city(),
-            }  
-        }
-    )
-    
-} , 10000) 
+    console.log('Welcome, your socket id:', socket.id);
 
+    socket.on('start', () => {
+        setInterval(() => {
+           
+            ioServer.emit('new-flight', { event: 'new-flight', time: new Date(),  Details: { 
+                airLine: 'Royal Jordanian Airlines', 
+                flightID: uuid.v4(),
+                pilot: faker.person.fullName(),
+                destination: faker.location.city(),
+                }  
+            }
+          
+        )
+    } , 10000) 
+    
+    })
+  
 
 socket.on('new-flight', newFlight)
 function newFlight(payload) {
@@ -37,8 +42,6 @@ function newFlight(payload) {
     }
 
 } )
-
-
 
 
 ioServer.of('/airline').on('connection', (socket) => {
