@@ -19,7 +19,7 @@ function handelNewFlight (payload){
     console.log(`Manager: new flight with ID ${payload.Details.flightID} have been scheduled`)
 
     socket.emit('new-flight', payload)
-    console.log(payload)
+    // console.log(payload)
     
 }
 
