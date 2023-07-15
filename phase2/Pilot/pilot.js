@@ -18,9 +18,9 @@ const mainSocket = ioClient.connect(host);
 
 
   mainSocket.on('new-flight',NewFlight)
-  mainSocket.on('get-all', getAllFlights)
-
- 
+  mainSocket.emit('get-all')
+  mainSocket.on('flight', handel)
+  
 
 
   function NewFlight(payload){
@@ -39,13 +39,40 @@ const mainSocket = ioClient.connect(host);
         payload.time = new Date();
         mainSocket.emit('Arrived', payload);
     }, 7000);
+
+  }
+
+
+function handel(payload){
+
+  Object.keys(payload.flights).forEach(id => {
+    console.log(`Pilot:Sorry i didn't catch this flight ID ${payload.flights[id].Details.flightID}`)
+    delete payload.flights[id]
+  })
+
+}
+
+
+  // function getAllFlights(payload){
+  //   mainSocket.emit('flight', payload)
+
+  //   setTimeout(()=>{
+  //     console.log('this is the AllList to the pilot',payload)
+
+  //   },3000)
+
+    
+    // mainSocket.emit('Delete-all-fligths', payload)
+
+    // mainSocket.on('Uncatched ID', (payload)=>{
+    //   console.log('FFFFFFFFFFFF',payload)
+    //   console.log(`Pilot:Sorry i didn't catch this flight ID ${payload.payload.Details.flightID}`)
+    // })
   
-  }
 
-  function getAllFlights(payload){
-    setTimeout(()=>{
-      console.log('this is the AllList to the pilot',payload)
 
-    },3000)
-      
-  }
+
+// function handelUncatchedFlight(payload){
+//   console.log('FFFFFFFFFFFF',payload)
+// console.log(`Pilot:Sorry i didn't catch this flight ID ${payload.payload.Details.flightID}`)
+// }
