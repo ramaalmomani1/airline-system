@@ -17,11 +17,14 @@ const mainSocket = ioClient.connect(host);
 //emit from the client 
 
 
-
   mainSocket.on('new-flight',NewFlight)
+  mainSocket.on('get-all', getAllFlights)
+
+ 
 
 
   function NewFlight(payload){
+    
     setTimeout(() => {
       console.log(`Pilot: flight with ID ${payload.Details.flightID} took-off`)
         payload.event = 'took-off';
@@ -39,3 +42,10 @@ const mainSocket = ioClient.connect(host);
   
   }
 
+  function getAllFlights(payload){
+    setTimeout(()=>{
+      console.log('this is the AllList to the pilot',payload)
+
+    },3000)
+      
+  }
