@@ -12,9 +12,11 @@ const socket = ioClient.connect(host);
 
 socket.emit('start')
 
-socket.on('new-flight', (payload) =>{
-socket.emit('new-flight', payload)
-})
+// socket.on('new-flight', (payload) =>{
+// socket.emit('new-flight', payload)
+// })
+
+
     //     socket.emit('new-flight', { event: 'new-flight', time: new Date(),  Details: { 
     //         airLine: 'Royal Jordanian Airlines', 
     //         flightID: uuid.v4(),

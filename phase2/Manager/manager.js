@@ -17,7 +17,10 @@ socket.on('new-flight', handelNewFlight)
 function handelNewFlight (payload){
    
     console.log(`Manager: new flight with ID ${payload.Details.flightID} have been scheduled`)
-   
+
+    socket.emit('new-flight', payload)
+    console.log(payload)
+    
 }
 
 setTimeout(() => {
