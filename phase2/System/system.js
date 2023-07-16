@@ -16,6 +16,7 @@ ioServer.on('connection', (socket) =>{ // connection event emitted automatically
     console.log('Welcome, your socket id:', socket.id);
 
     socket.on('start', () => {
+
         setInterval(() => {
            
             ioServer.emit('new-flight', { event: 'new-flight', time: new Date(),  Details: { 
@@ -28,6 +29,7 @@ ioServer.on('connection', (socket) =>{ // connection event emitted automatically
         )
         
     } , 10000) 
+
     })
   
     socket.on('get-all', ()=>{
@@ -39,7 +41,7 @@ ioServer.on('connection', (socket) =>{ // connection event emitted automatically
     socket.on('new-flight',(payload) =>{
         const id = uuid.v4();
         queue.flights[id] = payload;
-        console.log('queue =',queue.flights[id]);
+        // console.log('queue =',queue.flights[id]);
         // console.log(queue)
         // ioServer.emit('new-flight', queue)
 
