@@ -11,7 +11,7 @@ const socket = ioClient.connect(host); //automatically emmit an event called con
 
 
 
-
+socket.emit('start')
 socket.on('new-flight', handelNewFlight)
 
 function handelNewFlight (payload){
